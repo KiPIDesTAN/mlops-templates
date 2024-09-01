@@ -82,6 +82,24 @@ jobs:
     steps:
       - name: Checking out repo
         uses: actions/checkout@v3
+      - id: replace-tokens
+        name: replace-tokens
+        uses: qetza/replacetokens-action@v1.2.0
+        with:
+          sources: ${{ github.workspace }}/${{ inputs.file_name }}
+          variables: >
+            [ 
+              "@**/settings.(yml|yaml)"
+            ]
+          token-pattern: 'custom'
+          token-prefix: '[__'
+          token-suffix: '__]'
+      - run: |
+          echo "defaults  : ${{ steps.replace-tokens.outputs.defaults }}"
+          echo "files     : ${{ steps.replace-tokens.outputs.files }}"
+          echo "replaced  : ${{ steps.replace-tokens.outputs.replaced }}"
+          echo "tokens    : ${{ steps.replace-tokens.outputs.tokens }}"
+          echo "transforms: ${{ steps.replace-tokens.outputs.transforms }}"
       - name: Read test
         uses: KiPIDesTAN/mlops-templates/read_yaml_action@main
         id: read_action_js

@@ -33,7 +33,7 @@ try {
     var terraform_st_container_name = String(configYaml["variables"]["terraform_st_container_name"]);
     var terraform_st_key = String(configYaml["variables"]["terraform_st_key"]);
 
-  /*  if(checkGenerateEntity(terraform_st_location)){
+    if(checkGenerateEntity(terraform_st_location)){
       terraform_st_location = location;
     }
     if(checkGenerateEntity(resource_group)){
@@ -48,7 +48,7 @@ try {
     }
     if(checkGenerateEntity(terraform_st_storage_account)){
       terraform_st_storage_account = "st"+namespace+postfix+environment+"tf";
-    }*/
+    }
 
     const batch_endpoint_name = "bep-"+namespace+"-"+postfix+environment;
     const online_endpoint_name = "oep-"+namespace+"-"+postfix+environment;
